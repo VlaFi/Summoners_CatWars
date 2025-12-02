@@ -1,6 +1,6 @@
-package src.entities;
+package catWars.model.cats;
 
-import src.abilities.Ability;
+import catWars.logic.abilities.Ability;
 
 public class CreatureTemplate {
     private final String name;

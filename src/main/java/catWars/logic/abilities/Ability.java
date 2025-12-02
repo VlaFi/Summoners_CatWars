@@ -1,6 +1,6 @@
-package src.abilities;
+package catWars.logic.abilities;
 
-import src.entities.Creature;
+import catWars.model.cats.Creature;
 
 public abstract class Ability {
     private final String name;

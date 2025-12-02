@@ -1,8 +1,10 @@
-package src.entities;
+package catWars.model.cats;
 
 import java.util.ArrayList;
 import java.util.List;
-import src.abilities.Ability;
+
+import catWars.model.runes.Rune;
+import catWars.logic.abilities.Ability;
 
 public class Creature {
     private final String name;

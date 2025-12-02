@@ -1,6 +1,7 @@
-package src.entities;
+package catWars.model.cats;
 
-import src.abilities.Ability;
+import catWars.model.runes.Rune;
+import catWars.logic.abilities.Ability;
 
 import java.util.ArrayList;
 import java.util.List;

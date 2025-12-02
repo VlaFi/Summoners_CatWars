@@ -1,4 +1,4 @@
-package src.entities;
+package catWars.model.runes;
 
 public class Rune {
     public enum Type {

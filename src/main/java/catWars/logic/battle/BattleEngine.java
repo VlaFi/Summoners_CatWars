@@ -1,7 +1,7 @@
-package src.battle;
+package catWars.logic.battle;
 
-import src.entities.Creature;
-import src.abilities.Ability;
+import catWars.model.cats.Creature;
+import catWars.logic.abilities.Ability;
 import java.util.Scanner;
 
 public class BattleEngine {
