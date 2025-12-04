@@ -1,40 +1,24 @@
 package catWars;
 
-import catWars.*;
 import catWars.db.CreatureTemplateDao;
-import catWars.model.cats.Creature;
 import catWars.logic.battle.BattleEngine;
-import catWars.model.cats.CreatureTemplate;
-import catWars.model.runes.Rune;
+import catWars.logic.services.CreatureFactory;
+import catWars.model.cats.CreatureInstance;
 
 public class App {
     public static void main(String[] args) {
         CreatureTemplateDao dao = new CreatureTemplateDao();
-        CreatureTemplate template = dao.getAll().get(0);
+        CreatureFactory factory = new CreatureFactory(dao);
 
-        Creature player = new Creature(
-                template.getName(),
-                template.getBaseHp(),
-                template.getBaseAtk(),
-                template.getBaseDef(),
-                template.getBaseSpeed()
-        );
+        CreatureInstance c1 = factory.createInstanceFromTemplateName("CatVlaFi");
+        CreatureInstance c2 = factory.createInstanceFromTemplateName("CatStreet");
 
-        Creature enemy = new Creature("КотИзКафе", 100, 20, 15, 15);
+        if (c1 == null || c2 == null) {
+            System.out.println("Ошибка загрузки шаблонов из БД. Проверь названия в таблице creature_templates.");
+            return;
+        }
 
-//        player.addAbility(new BasicAttack());
-//        player.addAbility(new ToyAttack());
-//        enemy.addAbility(new BasicAttack());
-//        enemy.addAbility(new FurballAttack());
-
-        player.addRune(new Rune(Rune.Type.ATTACK));
-        player.addRune(new Rune(Rune.Type.ATTACK));
-        player.addRune(new Rune(Rune.Type.ATTACK));
-        player.addRune(new Rune(Rune.Type.ATTACK));
-        player.addRune(new Rune(Rune.Type.HP));
-        player.addRune(new Rune(Rune.Type.HP));
-
-        BattleEngine battle = new BattleEngine(player, enemy);
-        battle.start();
+        BattleEngine engine = new BattleEngine(c1, c2);
+        engine.start();
     }
 }

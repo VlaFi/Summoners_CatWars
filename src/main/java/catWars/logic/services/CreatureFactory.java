@@ -1,17 +1,19 @@
 package catWars.logic.services;
 
-import catWars.model.cats.Creature;
+import catWars.db.CreatureTemplateDao;
+import catWars.model.cats.CreatureInstance;
 import catWars.model.cats.CreatureTemplate;
 
 public class CreatureFactory {
-    private final CreatureService service;
+    private final CreatureTemplateDao templateDao;
 
-    public CreatureFactory(CreatureService service) {
-        this.service = service;
+    public CreatureFactory(CreatureTemplateDao templateDao) {
+        this.templateDao = templateDao;
     }
 
-    public Creature createFromTemplate(String name) {
-        CreatureTemplate t = service.getTemplateByName(name);
-        return new Creature(t); // Creature — твой игровой объект
+    public CreatureInstance createInstanceFromTemplateName(String name) {
+        CreatureTemplate t = templateDao.loadByName(name);
+        if (t == null) return null;
+        return new CreatureInstance(t);
     }
 }

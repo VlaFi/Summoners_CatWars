@@ -1,19 +1,28 @@
 package catWars.logic.services;
 
-import catWars.db.CreatureTemplateDao;
-import catWars.model.cats.CreatureTemplate;
-
-import java.util.List;
+import catWars.model.cats.Creature;
+import java.util.*;
 
 public class CreatureService {
 
-    private final CreatureTemplateDao dao = new CreatureTemplateDao();
+    private final Map<String, Creature> creatures = new HashMap<>();
+    private final AbilityService abilityService;
 
-    public List<CreatureTemplate> loadTemplates() {
-        return dao.getAll();
+    public CreatureService(AbilityService abilityService) {
+        this.abilityService = abilityService;
+        loadCreatures();
     }
 
-    public CreatureTemplate getTemplateByName(String name) {
-        return dao.getByName(name);
+    private void loadCreatures() {
+        creatures.put("DamageCat",
+                new Creature("DamageCat", 100, 15, List.of("Damage"))
+        );
+        creatures.put("HealerCat",
+                new Creature("HealerCat", 90, 10, List.of("Heal"))
+        );
+    }
+
+    public Creature findByName(String name) {
+        return creatures.get(name);
     }
 }

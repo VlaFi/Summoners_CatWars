@@ -1,19 +1,34 @@
 package catWars.logic.abilities;
 
-import catWars.model.cats.Creature;
+import catWars.model.cats.CreatureInstance;
 
 public abstract class Ability {
-    private final String name;
+    protected int id;
+    protected String name;
+    protected double power;
+    protected int cooldown; // базовый кулдаун
 
-    public Ability(String name) {
+    public Ability() {}
 
-        this.name = name;
+    public Ability(double power) { this.power = power; }
+
+    public final void use(CreatureInstance caster, CreatureInstance target) {
+        apply(caster, target);
     }
 
-    public String getName() {
+    protected abstract void apply(CreatureInstance caster, CreatureInstance target);
 
-        return name;
-    }
+    public abstract Ability copy();
 
-    public abstract void use(Creature user, Creature target);
+    public void setId(int id) { this.id = id; }
+    public int getId() { return id; }
+
+    public void setName(String name) { this.name = name; }
+    public String getName() { return name; }
+
+    public void setPower(double power) { this.power = power; }
+    public double getPower() { return power; }
+
+    public void setCooldown(int cooldown) { this.cooldown = cooldown; }
+    public int getCooldown() { return cooldown; }
 }
